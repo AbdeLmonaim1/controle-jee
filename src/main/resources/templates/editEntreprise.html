@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template"
+>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Entreprise</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.css">
 </head>
 <body>
+<div layout:fragment="content1">
+    <div class="col-md-6 offset-3">
+        <form method="post" th:action="@{save(page=${page},keyword=${keyword})}">
+            <div class="">
+                <label>ID : </label>
+                <label th:text="${entreprise.id}"></label>
+                <input class="form-control" type="hidden" name="id" th:value="${entreprise.id}">
+                <span class="text-danger" th:errors="${entreprise.id}"></span>
+            </div>
+            <div class="">
+                <label>Nom</label>
+                <input class="form-control" type="text" name="nom" th:value="${entreprise.nom}">
+                <span class="text-danger" th:errors="${entreprise.nom}"></span>
+            </div>
+            <div class="">
+                <label>Username</label>
+                <input class="form-control" type="text" name="username" th:value="${entreprise.username}">
+                <span class="text-danger" th:errors="${entreprise.username}"></span>
+            </div>
+            <div class="">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email" th:value="${entreprise.email}">
+                <span class="text-danger" th:errors="${entreprise.email}"></span>
+            </div>
+            <div class="">
+                <label>Activite</label>
+                <input type="text" class="form-control" name="activite" th:value="${entreprise.activite}">
+                <span class="text-danger" th:errors="${entreprise.activite}"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+
+    </div>
+
+</div>
 
 </body>
 </html>

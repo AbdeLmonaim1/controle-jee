@@ -61,6 +61,7 @@ public class EntrepriseController {
         Entreprise entreprise = entrepriseRepository.findById(id).get();
         if (entreprise == null) throw new RuntimeException("Cette Entreprise n'existe pas!!!");
         model.addAttribute("entreprise", entreprise);
+        System.out.println(entreprise.toString());
         model.addAttribute("page", page);
         model.addAttribute("keyword", keyword);
         return "editEntreprise";
