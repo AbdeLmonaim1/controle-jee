@@ -10,6 +10,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
 
@@ -19,7 +21,7 @@ public class ControleJeeApplication {
     public static void main(String[] args) {
         SpringApplication.run(ControleJeeApplication.class, args);
     }
-    @Bean
+//    @Bean
     CommandLineRunner commandLineRunner(EntrepriseRepository entrepriseRepository, ReservationRepository reservationRepository){
         return args -> {
             Entreprise entreprise1 = Entreprise.builder()
@@ -38,5 +40,9 @@ public class ControleJeeApplication {
                     .build();
             reservationRepository.save(reservation1);
         };
+    }
+    @Bean
+    PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 }
