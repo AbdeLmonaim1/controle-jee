@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Entreprises</title>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">Entreprise List</div>
+            <div class="card-body">
+                <form method="get" th:action="@{index}">
+                    <label>Key word</label>
+                    <input type="text" name="keyword" th:value="${keyword}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Activite</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="e:${entreprises}">
+                        <td th:text="${e.id}"></td>
+                        <td th:text="${e.nom}"></td>
+                        <td th:text="${e.username}"></td>
+                        <td th:text="${e.email}"></td>
+                        <td th:text="${e.activite}"></td>
+                        <td>
+                            <a onclick="return confirm('Are you sure')"
+                               class="btn btn-danger"
+                               th:href="@{/admin/delete(id=${e.id}, keyword=${keyword}, page=${currentPage})}"
+                            >
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-success" th:href="@{/admin/editEntreprise(id=${e.id}, keyword=${keyword}, page=${currentPage})}"
+                            >
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <ul class="nav nav-pills">
+                    <li th:each="page,status:${pages}" class="m-1">
+                        <a th:class="${status.index==currentPage ? 'btn btn-primary': 'btn btn-outline-primary'}"
+                           th:text="${status.index}"
+                           th:href="@{/user/index(page=${status.index}, keyword=${keyword})}"
+                        ></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
